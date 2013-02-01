@@ -6,6 +6,24 @@
     <%= js  :application %>
   </head>
   <body>
-    <h1>Ember demo</h1>
+    <h1>Ember blog demo</h1>
+    <script type="text/x-handlebars">
+      <div id="nav">
+        {{#linkTo posts}}Posts{{/linkTo}}
+      </div>
+      <div id="outlet">
+        {{outlet}}
+      </div>
+    </script>
+    <script type="text/x-handlebars" data-template-name="posts">
+      <ul id="posts">
+        {{#each content}}
+          <li>
+            <h2>{{title}}</h2>
+            <div class="body">{{body}}</div>
+          </li>
+        {{/each}}
+      </ul>
+    </script>
   </body>
 </html>
