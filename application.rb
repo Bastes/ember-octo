@@ -1,6 +1,8 @@
 require 'bundler'
 Bundler.require
 
+require 'active_support/core_ext/hash/slice'
+
 class Application < Sinatra::Base
   set :root, File.dirname(__FILE__)
   register Sinatra::AssetPack
@@ -78,36 +80,43 @@ class Application < Sinatra::Base
   DataMapper.finalize
   DataMapper.auto_upgrade!
 
+  helpers do
+    def post_data
+      JSON.parse(request.body.read.to_s)['post'].slice('title', 'body')
+    end
+  end
+
   get '/' do
     erb :index
   end
 
   get '/posts' do
     content_type :json
-    Post.all.to_json
+    {posts: Post.all(order: [:created_at.desc])}.to_json
   end
 
   get '/posts/:id' do |id|
     content_type :json
-    Post.get!(id).to_json
+    {post: Post.get!(id)}.to_json
   end
 
   post '/posts' do
-    render Post.create(params[:post]).to_json
+    content_type :json
+    {post: Post.create(post_data.merge(created_at: Time.now))}.to_json
   end
 
   get '/posts/:id/comments' do |id|
     content_type :json
-    Post.get!(id).comments.to_json
+    {comments: Post.get!(id).comments}.to_json
   end
 
   get '/categories' do
     content_type :json
-    Category.all.to_json
+    {categories: Category.all}.to_json
   end
 
   get '/categories/:id/posts' do |id|
     content_type :json
-    Category.get!(id).posts.to_json
+    {posts: Category.get!(id).posts}.to_json
   end
 end
