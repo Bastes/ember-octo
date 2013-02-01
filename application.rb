@@ -11,6 +11,9 @@ class Application < Sinatra::Base
     serve '/images', from: 'app/images'
 
     js :application, '/js/application.js', [
+      '/js/vendor/jquery/*.js',
+      '/js/vendor/handlebars/*.js',
+      '/js/vendor/ember/*.js',
       '/js/vendor/**/*.js',
       '/js/app/*.js',
       '/js/app/**/*.js'
