@@ -4,6 +4,7 @@
 
   App.Router.map(function () {
     this.resource('posts');
+    this.resource('post', {path: '/posts/:post_id'});
   });
 
   App.PostsRoute = Ember.Route.extend({
@@ -11,7 +12,17 @@
       return App.Post.find();
     },
     setupController: function (controller, model) {
-      controller.set('content', model);
+      controller.set('posts', model);
+    }
+  });
+
+  App.PostRoute = Ember.Route.extend({
+    model: function(params) {
+      return App.Post.find(params.post_id);
+    },
+    setupController: function (controller, model) {
+      this._super()
+      controller.set('post', model);
     }
   });
 

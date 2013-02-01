@@ -17,15 +17,23 @@
     </script>
     <script type="text/x-handlebars" data-template-name="posts">
       <ul id="posts">
-        {{#each content}}
+        {{#each post in posts}}
           <li>
             <h2>
-              {{title}}<small> - {{dateFormat createdAt}}</small>
+              {{#linkTo post post}}{{post.title}}{{/linkTo}} <small>- {{dateFormat post.createdAt}}</small>
             </h2>
-            <div class="body">{{paragraphed body}}</div>
+            <div class="body">{{paragraphed post.body}}</div>
           </li>
         {{/each}}
       </ul>
+    </script>
+    <script type="text/x-handlebars" data-template-name="post">
+      <div id="post">
+        <h2>
+          {{post.title}}<small> - {{dateFormat post.createdAt}}</small>
+        </h2>
+        <div class="body">{{paragraphed post.body}}</div>
+      </div>
     </script>
   </body>
 </html>
