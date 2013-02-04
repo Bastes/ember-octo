@@ -3,6 +3,7 @@
   window.App = App;
 
   App.Router.map(function () {
+    this.route('posts', {path: '/'});
     this.resource('posts');
     this.resource('post', {path: '/posts/:post_id'});
   });
