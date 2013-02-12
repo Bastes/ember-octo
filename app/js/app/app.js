@@ -41,6 +41,7 @@
   });
 
   Ember.Handlebars.registerBoundHelper('dateFormat', function (date) {
+    if (!date) return '';
     var day = date.getDate(),
         month = date.getMonth() + 1,
         year = date.getFullYear(),
@@ -49,6 +50,7 @@
   });
 
   Ember.Handlebars.registerBoundHelper('paragraphed', function (string) {
+    if (!string) return '';
     return new Handlebars.SafeString(string.
       replace(/^\s*/, '<p>').
       replace(/\s*$/, '</p>').
