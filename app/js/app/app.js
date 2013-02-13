@@ -6,6 +6,7 @@
     this.resource('posts', function () {
       this.route('new');
       this.route('show', {path: '/:post_id'});
+      this.route('edit', {path: '/:post_id/edit'});
     });
   });
 
@@ -19,16 +20,6 @@
     }
   });
 
-  App.PostsShowRoute = Ember.Route.extend({
-    model: function(params) {
-      return App.Post.find(params.post_id);
-    },
-    setupController: function (controller, model) {
-      this._super();
-      controller.set('content', model);
-    }
-  });
-
   App.PostsNewRoute = Ember.Route.extend({
     model: function () {
       return App.Post.createRecord();
@@ -38,6 +29,19 @@
       controller.set('content', model);
     }
   });
+
+  App.PostRoute = Ember.Route.extend({
+    model: function(params) {
+      return App.Post.find(params.post_id);
+    },
+    setupController: function (controller, model) {
+      this._super();
+      controller.set('content', model);
+    }
+  });
+
+  App.PostsShowRoute = App.PostRoute.extend();
+  App.PostsEditRoute = App.PostRoute.extend();
 
   App.PostsShowController = Ember.ObjectController.extend({
     delete: function () {
@@ -49,7 +53,22 @@
     }
   });
 
+  App.PostsEditController = Ember.ObjectController.extend({
+    headerTitle: 'Edit Post',
+    buttonTitle: 'Update',
+    save: function () {
+      this.store.commit();
+      this.transitionToRoute('posts.show', this.content);
+    },
+    cancel: function () {
+      if (this.content.isDirty) this.content.rollback();
+      this.transitionToRoute('posts.show', this.content);
+    }
+  });
+
   App.PostsNewController = Ember.ObjectController.extend({
+    headerTitle: 'New Post',
+    buttonTitle: 'Create',
     save: function () {
       this.store.commit();
       this.content.addObserver('id', this, 'afterSave');

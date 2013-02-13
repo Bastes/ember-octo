@@ -105,6 +105,13 @@ class Application < Sinatra::Base
     {post: Post.create(post_data.merge(created_at: Time.now))}.to_json
   end
 
+  put '/posts/:id' do |id|
+    content_type :json
+    @post = Post.get!(id)
+    @post.update post_data
+    {post: @post}.to_json
+  end
+
   delete '/posts/:id' do |id|
     content_type :json
     status 204

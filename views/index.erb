@@ -33,11 +33,18 @@
           {{title}}<small> - {{dateFormat createdAt}}</small>
         </h2>
         <div class="body">{{paragraphed body}}</div>
+        {{#linkTo 'posts.edit' content}}Edit{{/linkTo}}
         <button {{action delete}}>Destroy</button>
       </div>
     </script>
     <script type="text/x-handlebars" data-template-name="posts/new">
-      <h2>New Post</h2>
+      {{template 'posts/form'}}
+    </script>
+    <script type="text/x-handlebars" data-template-name="posts/edit">
+      {{template 'posts/form'}}
+    </script>
+    <script type="text/x-handlebars" data-template-name="posts/form">
+      <h1>{{headerTitle}}</h1>
       <form>
         <div>
           <label {{bindAttr for="titleField.elementId"}}>Title</label>
@@ -48,7 +55,7 @@
           {{view Ember.TextArea valueBinding='body' name='body' viewName='bodyField'}}
         </div>
         <button {{action cancel}}>Annuler</button>
-        <button {{action save}}>Create</button>
+        <button {{action save}}>{{buttonTitle}}</button>
       </form>
     </script>
   </body>
