@@ -39,6 +39,16 @@
     }
   });
 
+  App.PostsShowController = Ember.ObjectController.extend({
+    delete: function () {
+      if (confirm('Are you sure?')) {
+        this.content.deleteRecord();
+        this.store.commit();
+        this.transitionToRoute('posts.index');
+      }
+    }
+  });
+
   App.PostsNewController = Ember.ObjectController.extend({
     save: function () {
       this.store.commit();
