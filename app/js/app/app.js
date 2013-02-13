@@ -3,27 +3,54 @@
   window.App = App;
 
   App.Router.map(function () {
-    this.route('posts', {path: '/'});
-    this.resource('posts');
-    this.resource('post', {path: '/posts/:post_id'});
+    this.resource('posts', function () {
+      this.route('new');
+      this.route('show', {path: '/:post_id'});
+    });
   });
 
-  App.PostsRoute = Ember.Route.extend({
+  App.PostsIndexRoute = Ember.Route.extend({
     model: function() {
       return App.Post.find();
     },
     setupController: function (controller, model) {
+      this._super()
       controller.set('posts', model);
     }
   });
 
-  App.PostRoute = Ember.Route.extend({
+  App.PostsShowRoute = Ember.Route.extend({
     model: function(params) {
       return App.Post.find(params.post_id);
     },
     setupController: function (controller, model) {
+      this._super();
+      controller.set('content', model);
+    }
+  });
+
+  App.PostsNewRoute = Ember.Route.extend({
+    model: function () {
+      return App.Post.createRecord();
+    },
+    setupController: function (controller, model) {
       this._super()
-      controller.set('post', model);
+      controller.set('content', model);
+    }
+  });
+
+  App.PostsNewController = Ember.ObjectController.extend({
+    save: function () {
+      this.store.commit();
+      this.content.addObserver('id', this, 'afterSave');
+    },
+    cancel: function () {
+      this.content.deleteRecord();
+      this.transitionToRoute('posts.index');
+    },
+    afterSave: function () {
+      this.content.removeObserver('id', this, 'afterSave');
+      this.transitionToRoute('posts.show', this.content);
     }
   });
 
