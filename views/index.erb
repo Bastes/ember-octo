@@ -7,56 +7,5 @@
   </head>
   <body>
     <h1>Ember blog demo</h1>
-    <script type="text/x-handlebars">
-      <div id="nav">
-        {{#linkTo posts}}Posts{{/linkTo}}
-      </div>
-      <div id="outlet">
-        {{outlet}}
-      </div>
-    </script>
-    <script type="text/x-handlebars" data-template-name="posts/index">
-      <ul id="posts">
-        <li>{{#linkTo 'posts.new'}}New post{{/linkTo}}</li>
-        {{#each post in posts}}
-          <li>
-            <h2>
-              {{#linkTo 'posts.show' post}}{{post.title}}{{/linkTo}} <small>- {{dateFormat post.createdAt}}</small>
-            </h2>
-          </li>
-        {{/each}}
-      </ul>
-    </script>
-    <script type="text/x-handlebars" data-template-name="posts/show">
-      <div id="post">
-        <h2>
-          {{title}}<small> - {{dateFormat createdAt}}</small>
-        </h2>
-        <div class="body">{{paragraphed body}}</div>
-        {{#linkTo 'posts.edit' content}}Edit{{/linkTo}}
-        <button {{action delete}}>Destroy</button>
-      </div>
-    </script>
-    <script type="text/x-handlebars" data-template-name="posts/new">
-      {{template 'posts/form'}}
-    </script>
-    <script type="text/x-handlebars" data-template-name="posts/edit">
-      {{template 'posts/form'}}
-    </script>
-    <script type="text/x-handlebars" data-template-name="posts/form">
-      <h1>{{headerTitle}}</h1>
-      <form>
-        <div>
-          <label {{bindAttr for="titleField.elementId"}}>Title</label>
-          {{view Ember.TextField valueBinding='title' name='title' viewName='titleField'}}
-        </div>
-        <div>
-          <label {{bindAttr for="bodyField.elementId"}}>Body</label>
-          {{view Ember.TextArea valueBinding='body' name='body' viewName='bodyField'}}
-        </div>
-        <button {{action cancel}}>Annuler</button>
-        <button {{action save}}>{{buttonTitle}}</button>
-      </form>
-    </script>
   </body>
 </html>

@@ -5,7 +5,12 @@ require 'active_support/core_ext/hash/slice'
 
 class Application < Sinatra::Base
   set :root, File.dirname(__FILE__)
+  register Sinatra::Ember
   register Sinatra::AssetPack
+
+  ember do
+    templates '/js/templates.js', ['app/js/app/templates/**/*.hbs'], relative_to: 'app/js/app/templates'
+  end
 
   assets do
     serve '/js',     from: 'app/js'
@@ -18,7 +23,8 @@ class Application < Sinatra::Base
       '/js/vendor/ember/*.js',
       '/js/vendor/**/*.js',
       '/js/app/*.js',
-      '/js/app/**/*.js'
+      '/js/app/**/*.js',
+      '/js/templates.js'
     ]
 
     css :application, '/css/application.css', [

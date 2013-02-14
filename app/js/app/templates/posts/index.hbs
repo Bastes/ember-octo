@@ -1,0 +1,10 @@
+<ul id="posts">
+  <li>{{#linkTo 'posts.new'}}New post{{/linkTo}}</li>
+  {{#each post in posts}}
+    <li>
+      <h2>
+        {{#linkTo 'posts.show' post}}{{post.title}}{{/linkTo}} <small>- {{dateFormat post.createdAt}}</small>
+      </h2>
+    </li>
+  {{/each}}
+</ul>
