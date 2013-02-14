@@ -22,6 +22,7 @@ class Application < Sinatra::Base
       '/js/vendor/handlebars/*.js',
       '/js/vendor/ember/*.js',
       '/js/vendor/**/*.js',
+      '/js/app/app.js',
       '/js/app/*.js',
       '/js/app/**/*.js',
       '/js/templates.js'
