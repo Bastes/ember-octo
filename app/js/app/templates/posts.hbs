@@ -1,1 +1,8 @@
-{{ partial 'posts/index' }}
+<div class="row">
+  <div class="span4">
+    {{ partial 'posts/index' }}
+  </div>
+  <div class="span8">
+    {{ outlet }}
+  </div>
+</div>
