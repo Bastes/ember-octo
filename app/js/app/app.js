@@ -1,7 +1,6 @@
-(function () {
-  window.App = Ember.Application.create();
+var App = Ember.Application.create();
+window.App = App;
 
-  App.Store = DS.Store.extend({
-    revision: 11
-  });
-})();
+App.Store = DS.Store.extend({
+  revision: 11
+});
