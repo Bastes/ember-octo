@@ -2,11 +2,13 @@ require 'bundler'
 Bundler.require
 
 require 'active_support/core_ext/hash/slice'
+require 'sinatra/twitter-bootstrap'
 
 class Application < Sinatra::Base
   set :root, File.dirname(__FILE__)
   register Sinatra::Ember
   register Sinatra::AssetPack
+  register Sinatra::Twitter::Bootstrap::Assets
 
   ember do
     templates '/js/templates.js', ['app/js/app/templates/**/*.hbs'], relative_to: 'app/js/app/templates'
