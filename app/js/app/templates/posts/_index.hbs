@@ -1,3 +1,9 @@
-{{#each controller}}
-<h2>{{#linkTo 'post' this}}{{ title }}{{/linkTo}}<small> - {{ dateFormat createdAt }}</small></h2>
-{{/each}}
+<ul class="unstyled">
+  <li>{{#linkTo 'posts.new'}}+ New Post{{/linkTo}}</li>
+  {{#each controller}}
+  <li>
+    {{#linkTo 'post' this}}{{ title }}{{/linkTo}}
+    <small> - {{ dateFormat createdAt }}</small>
+  </li>
+  {{/each}}
+</ul>
