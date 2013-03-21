@@ -1,0 +1,13 @@
+<h2>Edit Post</h2>
+<form>
+  <div>
+    <label {{bindAttr for="titleField.elementId"}}>Title</label>
+    {{view Ember.TextField valueBinding='title' name='title' viewName='titleField'}}
+  </div>
+  <div>
+    <label {{bindAttr for="bodyField.elementId"}}>Body</label>
+    {{view Ember.TextArea valueBinding='body' name='body' viewName='bodyField'}}
+  </div>
+  <a {{action cancel}} class="btn">Cancel</a>
+  <a {{action save}} class="btn btn-primary">Update</a>
+</form>
