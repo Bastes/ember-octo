@@ -6,13 +6,8 @@ require 'sinatra/twitter-bootstrap'
 
 class Application < Sinatra::Base
   set :root, File.dirname(__FILE__)
-  register Sinatra::Ember
   register Sinatra::AssetPack
   register Sinatra::Twitter::Bootstrap::Assets
-
-  ember do
-    templates '/js/templates.js', ['app/js/app/templates/**/*.hbs'], relative_to: 'app/js/app/templates'
-  end
 
   assets do
     serve '/js',     from: 'app/js'
@@ -24,11 +19,7 @@ class Application < Sinatra::Base
       '/js/vendor/handlebars/*.js',
       '/js/vendor/ember/*.js',
       '/js/vendor/**/*.js',
-      '/js/app/app.js',
-      '/js/app/models/*.js',
-      '/js/app/*.js',
-      '/js/app/**/*.js',
-      '/js/templates.js'
+      '/js/app.js'
     ]
 
     css :application, '/css/application.css', [
@@ -37,12 +28,6 @@ class Application < Sinatra::Base
 
     js_compression  :jsmin
     css_compression :sass
-  end
-
-  helpers do
-    def post_data
-      JSON.parse(request.body.read.to_s)['post'].slice('title', 'body')
-    end
   end
 
   get '/' do
