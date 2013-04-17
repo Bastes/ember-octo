@@ -18,7 +18,7 @@ Router:
 Route:
 - responsable du chargement des données à la première visite de la route
 - peut attraper les évènements que le contrôleur ou la vue ne gèrent pas
-- enter, exit déclenchés à l'entrée ou la sortie d'une route
+- les callbacks enter, exit sont déclenchés à l'entrée ou la sortie d'une route
 - /!\ le helper linkTo utilise le routeur mais pas la route ; il fournir directement les données au controlleur
 - exemple:
   App.ItemRoute = Ember.Route.extend({
@@ -39,7 +39,7 @@ Store et Adapter:
 Model:
 - représente les données fournies par le serveur
 - dépendent d'une Store avec un Adapter (REST, Fixtures, etc.)
-- cycle de vie: isLoaded, isDirty, isSaving, isDeleted, isError, isNew, isValid
+- cycle de vie: isLoaded, isDirty, isSaving, isDeleted, isError, isNew, isValid (il y a des callbacks correspondants a ces états)
 - ont des Attributes (string, number, date, boolean) et des Relationships
 - id obligatoire (peut être un nombre ou un chaîne arbitraire)
 - les Stores permettent de créer des transactions
