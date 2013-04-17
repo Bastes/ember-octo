@@ -1,0 +1,65 @@
+Application:
+- namespace pour contenir les autres objets
+- exemple:
+  App = Ember.Application.create()
+
+Router:
+- définit les routes
+- les routes peuvent être hiérarchiques
+- exemple:
+  App.Router.map(function () {
+    // route vers ItemsController
+    this.resource('items', function() {
+      // route vers ItemController par un outlet de la vue de l'ItemsController
+      this.resource('item', { path: ':item_id' });
+    });
+  });
+
+Route:
+- responsable du chargement des données à la première visite de la route
+- peut attraper les évènements que le contrôleur ou la vue ne gèrent pas
+- enter, exit déclenchés à l'entrée ou la sortie d'une route
+- /!\ le helper linkTo utilise le routeur mais pas la route ; il fournir directement les données au controlleur
+- exemple:
+  App.ItemRoute = Ember.Route.extend({
+    model: function (params) { return App.Item.find(params.item_id); }
+  });
+
+Store et Adapter:
+- fait le lien entre la source de données et le modèle
+- défini dans un projet à part (ember-data)
+- /!\ pas encore sec
+- deux Adapters existants : fixtures et REST
+- exemple:
+  App.Store = DS.Store.extend({
+    revision: 12,
+    adapter: 'DS.FixtureAdapter'
+  });
+
+Model:
+- représente les données fournies par le serveur
+- dépendent d'une Store avec un Adapter (REST, Fixtures, etc.)
+- cycle de vie: isLoaded, isDirty, isSaving, isDeleted, isError, isNew, isValid
+- ont des Attributes (string, number, date, boolean) et des Relationships
+- id obligatoire (peut être un nombre ou un chaîne arbitraire)
+- les Stores permettent de créer des transactions
+- exemple:
+  App.Item = DS.Model.extend({
+    name: DS.attr('string'),
+    quantity: DS.attr('number')
+  });
+
+Controller:
+- fournit les données aux vues / templates
+- peut répondre aux actions des vues
+- peut accéder à d'autres controleurs (needs)
+- la route (ou les linkTo) lui fournissent ses données
+- pour gérer une liste d'objets: ArrayController
+- pour gérer un objet unique: ObjectController
+
+View:
+- s'attache à une template et gére les évènements bas niveau pour simplifier le controleur
+
+template:
+- contient le code Handlebars + html
+- peut être stocké dans des fichiers de template ou dans des balises <script> du code html
