@@ -39,7 +39,7 @@ Store et Adapter:
 Model:
 - représente les données fournies par le serveur
 - dépendent d'une Store avec un Adapter (REST, Fixtures, etc.)
-- cycle de vie: isLoaded, isDirty, isSaving, isDeleted, isError, isNew, isValid (il y a des callbacks correspondants a ces états)
+- cycle de vie: isLoaded, isDirty, isSaving, isDeleted, isError, isNew, isValid (il y a des callbacks correspondant à ces états)
 - ont des Attributes (string, number, date, boolean) et des Relationships
 - id obligatoire (peut être un nombre ou un chaîne arbitraire)
 - les Stores permettent de créer des transactions
