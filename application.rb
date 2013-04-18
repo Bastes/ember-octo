@@ -2,12 +2,10 @@ require 'bundler'
 Bundler.require
 
 require 'active_support/core_ext/hash/slice'
-require 'sinatra/twitter-bootstrap'
 
 class Application < Sinatra::Base
   set :root, File.dirname(__FILE__)
   register Sinatra::AssetPack
-  register Sinatra::Twitter::Bootstrap::Assets
 
   assets do
     serve '/js',     from: 'app/js'
