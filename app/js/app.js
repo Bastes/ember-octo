@@ -9,6 +9,16 @@ App.Table = DS.Model.extend({
 	name: DS.attr("string")
 });
 
+App.Router.map(function () {
+	this.resource('tables');
+});
+
+App.IndexRoute = Ember.Route.extend({
+  redirect: function() {
+    this.transitionTo('tables');
+  }
+});
+
 App.Table.FIXTURES = [
   {id: 1, name: "Table 1"},
   {id: 2, name: "Table 2"},
