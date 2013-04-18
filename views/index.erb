@@ -19,16 +19,24 @@
   	<script type="text/x-handlebars" data-template-name="tables">
   		<h2>Liste des tables</h2>
   		<div class='row'>
-			<div class='four columns'>
+			<div id='tables' class='four columns'>
 	  			{{ render '_tableList' controller}}
+	  		</div>
+	  		<div id='order' class='eight columns'>
+	  		    {{ outlet }}
 	  		</div>
   		</div>
   	</script>
   	<script type="text/x-handlebars" data-template-name="_tableList">
   		{{#each table in controller}}
-	  		{{table.name}}
+	  		{{#linkTo "table" table}}
+	  			{{table.name}}
+	  		{{/linkTo}}
+	  		<br/>
 	  	{{/each}}
   	</script>
-
+  	<script type="text/x-handlebars" data-template-name="table">
+  		<h3>{{name}}</h3>
+  	</script>
   </body>
 </html>

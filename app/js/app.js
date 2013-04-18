@@ -10,7 +10,9 @@ App.Table = DS.Model.extend({
 });
 
 App.Router.map(function () {
-	this.resource('tables');
+	this.resource('tables', function () {
+		this.resource('table', { path: ':table_id' })
+	});
 });
 
 App.IndexRoute = Ember.Route.extend({
@@ -23,7 +25,13 @@ App.TablesRoute = Ember.Route.extend({
     model: function () { 
     	return App.Table.find();
     }
- });
+});
+
+App.TableRoute = Ember.Route.extend({
+    model: function (params) {
+    	return App.Table.find(params.table_id);
+    }
+});
 
 App.Table.FIXTURES = [
   {id: 1, name: "Table 1"},
