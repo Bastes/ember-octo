@@ -88,3 +88,16 @@ App.Food.FIXTURES = [
   {id: 4, name: "Pancakes", imagePath: "/images/pancakes.png", price: 2.7},
   {id: 5, name: "Pizza", imagePath: "/images/pizza.png", price: 12.3}
 ];
+
+Ember.Handlebars.registerBoundHelper('formatPrice', function(value) {
+	if (isNaN(value)) {
+		return "0.00 €";
+	}
+	value = value*100;
+	price = (value % 100 === 0 ? value / 100 + ".00" : parseInt(value / 100, 10) + "." + value % 100);
+	return price + ' €';
+});
+
+
+
+
