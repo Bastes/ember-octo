@@ -1,8 +1,6 @@
 require 'bundler'
 Bundler.require
 
-require 'active_support/core_ext/hash/slice'
-
 class Application < Sinatra::Base
   set :root, File.dirname(__FILE__)
   register Sinatra::AssetPack
