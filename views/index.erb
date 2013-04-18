@@ -27,6 +27,7 @@
 	  		</div>
   		</div>
   	</script>
+
   	<script type="text/x-handlebars" data-template-name="_tableList">
   		{{#each table in controller}}
 	  		{{#linkTo "table" table}}
@@ -35,8 +36,16 @@
 	  		<br/>
 	  	{{/each}}
   	</script>
+
   	<script type="text/x-handlebars" data-template-name="table">
   		<h3>{{name}}</h3>
+  		{{render 'tab' tab}}
+  	</script>
+
+  	<script type="text/x-handlebars" data-template-name="tab">
+  		{{#each tabItem in tabItems}}
+  			<img {{bindAttr src="tabItem.food.imagePath"}}/>
+  		{{/each}}
   	</script>
   </body>
 </html>
