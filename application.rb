@@ -23,7 +23,8 @@ class Application < Sinatra::Base
     ]
 
     css :application, '/css/application.css', [
-      '/css/*.css'
+      '/css/foundation.css',
+      '/css/app.css'
     ]
 
     js_compression  :jsmin
