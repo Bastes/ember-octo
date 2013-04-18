@@ -13,7 +13,12 @@ App.Table = DS.Model.extend({
 });
 
 App.Tab = DS.Model.extend({
-	tabItems: DS.hasMany('App.TabItem')
+	tabItems: DS.hasMany('App.TabItem'),
+	total: function () {
+		return this.get('tabItems').reduce(function (r, ti) {
+			return r + ti.get('price');
+		}, 0)
+	}.property('tabItems.@each.price')
 });
 
 App.TabItem = DS.Model.extend({

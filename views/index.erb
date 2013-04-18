@@ -45,7 +45,9 @@
   	<script type="text/x-handlebars" data-template-name="tab">
   		{{#each tabItem in tabItems}}
   			<img {{bindAttr src="tabItem.food.imagePath"}}/>
+  			<br/>
   		{{/each}}
+  		= {{ total }}
   	</script>
   </body>
 </html>
