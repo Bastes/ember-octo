@@ -19,6 +19,12 @@ App.IndexRoute = Ember.Route.extend({
   }
 });
 
+App.TablesRoute = Ember.Route.extend({
+    model: function () { 
+    	return App.Table.find();
+    }
+ });
+
 App.Table.FIXTURES = [
   {id: 1, name: "Table 1"},
   {id: 2, name: "Table 2"},
